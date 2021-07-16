@@ -14,5 +14,4 @@ spec:
   selector:
     app: mongo
 
-  externalIPs:
-    - null
+
