@@ -1,13 +1,22 @@
-apiVersion: v1
-kind: Service
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
 metadata:
-  name: mongo
-  labels:
-    app: mongo
+  name: mongodb-replica-set
+  namespace: mongodb
 spec:
-  ports:
-  - name: mongo
-    port: 27017
-    targetPort: 27017
-  selector:
-    app: mongo
+  members: 3
+  type: ReplicaSet
+  version: "4.4.0"
+  security:
+    authentication:
+      modes: ["SCRAM"]
+  users:
+    - name: my-mongodb-user
+      db: admin
+      passwordSecretRef: 
+        name: my-mongodb-user-password # the name of the secret we created
+      roles: # the roles that we want to the user to have
+        - name: readWrite
+          db: myDb
+      scramCredentialsSecretName: mongodb-replica-set
+  
