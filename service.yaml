@@ -1,24 +1,5 @@
-
-apiVersion: mongodb.com/v1
-kind: MongoDB
+apiVersion: v1
+kind: ServiceAccount
 metadata:
-
-  name: mongo
-
-spec:
-
-  members: 3
-
-  version: "4.2.2-ent"
-
-  opsManager:
-    configMapRef:
-
-      name: mongo
-
-            # Must match metadata.name in ConfigMap file
-
-  credentials: mongo
-
-  type: ReplicaSet
-  persistent: true
+  name: mongodb-enterprise-operator
+  namespace: production
