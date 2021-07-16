@@ -8,7 +8,6 @@ spec:
   ports:
   - name: mongo
     port: 27017
-    targetPort: 27017
   type: LoadBalancer
     
   selector:
