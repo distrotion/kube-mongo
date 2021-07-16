@@ -1,22 +1,24 @@
+
 apiVersion: mongodb.com/v1
-kind: MongoDBCommunity
+kind: MongoDB
 metadata:
-  name: mongodb-replica-set
-  namespace: mongodb
+
+  name: mongo
+
 spec:
+
   members: 3
+
+  version: "4.2.2-ent"
+
+  opsManager:
+    configMapRef:
+
+      name: mongo
+
+            # Must match metadata.name in ConfigMap file
+
+  credentials: mongo
+
   type: ReplicaSet
-  version: "4.4.0"
-  security:
-    authentication:
-      modes: ["SCRAM"]
-  users:
-    - name: my-mongodb-user
-      db: admin
-      passwordSecretRef: 
-        name: my-mongodb-user-password # the name of the secret we created
-      roles: # the roles that we want to the user to have
-        - name: readWrite
-          db: myDb
-      scramCredentialsSecretName: mongodb-replica-set
-  
+  persistent: true
