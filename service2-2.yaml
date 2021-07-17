@@ -5,6 +5,11 @@ metadata:
   labels:
     app: database
 spec:
-  clusterIP: None
+  ports:
+  - name: database
+    port: 27017
+    targetPort: 27017
+  
+  type: LoadBalancer
   selector:
     app: database
